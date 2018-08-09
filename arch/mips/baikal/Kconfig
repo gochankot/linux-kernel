@@ -197,6 +197,21 @@ config MACH_BAIKAL_RT1MB
 	# PCIe
 	select PCI_DRIVERS_GENERIC
 
+config MACH_BAIKAL_MRBT1
+	bool "Baikal-T MRBT1 board"
+
+	select MIPS_BAIKAL_T1
+	select BAIKAL_T_COMMON
+
+	# Errata set
+	select PAGE_SIZE_16KB
+
+	# DTB select
+	select DTB_BAIKAL_MRBT1
+
+	# PCIe
+	select PCI_DRIVERS_GENERIC
+
 config MACH_BAIKAL_QEMU
 	bool "Baikal-T QEMU simulator"
 
@@ -299,6 +314,12 @@ config DTB_TP_RT1MB
 	  Device tree for T-Platforms RT1MB board
 	  based on Baikal-T1 SOC.
 
+config DTB_BAIKAL_MRBT1
+	bool "Baikal-T MRBT1 board"
+	help
+	  Device tree for T-Platforms MRBT1 boards
+	  based on Baikal-T SOC.
+
 endchoice
 
 config ARCH_NR_GPIO
@@ -309,6 +330,7 @@ config ARCH_NR_GPIO
 	default 40 if MACH_BAIKAL_MITX
 	default 48 if MACH_BAIKAL_MODULE
 	default 48 if MACH_BAIKAL_MSBT2
+	default 64 if MACH_BAIKAL_MRBT1
 	default 32
 	help
 	  Maximum number of GPIOs in the system.

@@ -34,13 +34,15 @@ static int baikal_dwmac_dma_reset(void __iomem *ioaddr)
 	/* DMA SW reset */
 	value |= DMA_BUS_MODE_SFT_RESET;
 	writel(value, ioaddr + DMA_BUS_MODE);
+	mdelay(100);
 
 	/* Clear PHY reset */
 	value = readl(ioaddr + GMAC_GPIO);
 	value |= GMAC_GPIO_GPO0;
 	writel(value, ioaddr + GMAC_GPIO);
+	mdelay(100);
 
-	limit = 10;
+	limit = 100;
 	while (limit--) {
 		if (!(readl(ioaddr + DMA_BUS_MODE) & DMA_BUS_MODE_SFT_RESET))
 			break;
